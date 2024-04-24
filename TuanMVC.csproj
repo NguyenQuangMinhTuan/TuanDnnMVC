@@ -132,6 +132,7 @@
     <Compile Include="Interface\IConnectDatabase.cs" />
     <Compile Include="Interface\ISinhVienRepository.cs" />
     <Compile Include="Interface\ISinhVien_KhoaRepository.cs" />
+    <Compile Include="Interface\ISinhVienVangRepository.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Books.cs" />
@@ -141,16 +142,19 @@
     <Compile Include="Models\SinhVien.cs" />
     <Compile Include="Models\SinhVien_Khoa.cs" />
     <Compile Include="Models\SinhVien_Vang.cs" />
+    <Compile Include="Models\SinhVien_VLop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AuthorRepository.cs" />
     <Compile Include="Repository\BooksRepository.cs" />
     <Compile Include="Repository\ConnectDatabase.cs" />
     <Compile Include="Repository\SinhVienRepository.cs" />
+    <Compile Include="Repository\SinhVienVangRepository.cs" />
     <Compile Include="Repository\SinhVien_KhoaRepository.cs" />
     <Compile Include="Services\AuthorApiController.cs" />
     <Compile Include="Services\ApiBaseController.cs" />
     <Compile Include="Services\BooksApiController.cs" />
     <Compile Include="Services\SinhVienApiController.cs" />
+    <Compile Include="Services\SinhVienVangApiController.cs" />
     <Compile Include="Services\SinhVien_KhoaApiController.cs" />
   </ItemGroup>
   <ItemGroup>
