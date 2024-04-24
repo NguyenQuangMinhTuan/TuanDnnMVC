@@ -127,10 +127,12 @@
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SinhVienController.cs" />
     <Compile Include="Controllers\SinhVienVangController.cs" />
+    <Compile Include="Controllers\SinhVienVLopController.cs" />
     <Compile Include="Interface\IAuthorRepository.cs" />
     <Compile Include="Interface\IBooksRepository.cs" />
     <Compile Include="Interface\IConnectDatabase.cs" />
     <Compile Include="Interface\ISinhVienRepository.cs" />
+    <Compile Include="Interface\ISinhVienVLopRepository.cs" />
     <Compile Include="Interface\ISinhVien_KhoaRepository.cs" />
     <Compile Include="Interface\ISinhVienVangRepository.cs" />
     <Compile Include="Models\Request.cs" />
@@ -149,12 +151,14 @@
     <Compile Include="Repository\ConnectDatabase.cs" />
     <Compile Include="Repository\SinhVienRepository.cs" />
     <Compile Include="Repository\SinhVienVangRepository.cs" />
+    <Compile Include="Repository\SinhVienVLopRepository.cs" />
     <Compile Include="Repository\SinhVien_KhoaRepository.cs" />
     <Compile Include="Services\AuthorApiController.cs" />
     <Compile Include="Services\ApiBaseController.cs" />
     <Compile Include="Services\BooksApiController.cs" />
     <Compile Include="Services\SinhVienApiController.cs" />
     <Compile Include="Services\SinhVienVangApiController.cs" />
+    <Compile Include="Services\SinhVienVLopApiController.cs" />
     <Compile Include="Services\SinhVien_KhoaApiController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +211,7 @@
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\SinhVien\Index.cshtml" />
     <Content Include="Views\SinhVienVang\Index.cshtml" />
+    <Content Include="Views\SinhVienVLop\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
