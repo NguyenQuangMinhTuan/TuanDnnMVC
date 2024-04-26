@@ -6,9 +6,10 @@
 
 <div class="form-filter">
     <div class="form-row">
-        <div style="margin: 10px 100px" class="form-group">
-            <label style="margin-left:10px">Từ khóa</label>
-            <input style="margin-left:10px; width:550px" class="1" type="text" id="tu-khoa-search" />
+        <div style="text-align: center" class="form-group">
+            <label style="margin-left:10px">Tìm sinh viên</label>
+            <input style="margin-left:10px; width:300px" class="1" type="text" id="tu-khoa-search" />
+            <input class="1" type="hidden" id="ma-search" />
 
             <button style="width:92px; margin-left: 10px" type="button" class="1" id="filter-btn">Tìm kiếm</button>
             <button style="width:92px; margin: 0px 10px" type="button" class="1" id="filter-cancel-btn">Tất cả</button>
@@ -19,7 +20,10 @@
 <hr />
 
 <div style="text-align:center" class="Container">
-    <a href="~/Module-Students/Student">Move to Student</a>
+    <select style="width:150px" id="MaLopSelect">
+        <!-- Mặc định là một option rỗng -->
+        <option value="">Chọn Mã Lớp</option>
+    </select>
 </div>
 
 <div class="table-tree-wrapper table-form-field">
@@ -35,7 +39,6 @@
                     <th>SoDienThoai</th>
                     <th>MaLop</th>
                     <th>TenMon</th>
-                    <th style="color:red; text-decoration: underline">Setting</th>
                 </tr>
             </thead>
         </table>
@@ -122,6 +125,72 @@
     </div>
 </div>
 
+<!-- script for dropdown MaLop -->
+<script>
+    $(document).ready(function () {
+        // Khởi tạo Select2 cho Select Dropdown
+        $('#MaLopSelect').select2({
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            language: "vi",
+            placeholder: "Chọn Lớp",
+        });
+
+        $('#MaLopSelect').on('change', function () {
+            let maLop = $(this).val(); // Lấy giá trị mã lớp đã chọn
+
+            if (maLop === 'all') {
+                $('#tu-khoa-search').val(""); // Cập nhật giá trị tìm kiếm thành chuỗi trống
+            } else {
+                $('#tu-khoa-search').val(maLop); // Cập nhật giá trị tìm kiếm với mã lớp đã chọn
+            }
+
+            // Reload datatable với mã lớp đã chọn
+            $('#dataGrid').DataTable().ajax.reload().draw();
+        });
+
+        // Lấy danh sách Khoa từ API và điền vào Select Dropdown
+        $.ajax({
+            url: `${BASEURL}/api/TuanMVC/SinhVienLopApi/Gets`,
+            type: "POST",
+            data: buildData1(),
+            success: function (data) {
+                const MaLop = $('#MaLopSelect');
+                MaLop.empty(); // Xóa tất cả các option hiện có
+
+                // Thêm option "Select All"
+                const selectAllOption = $('<option>', {
+                    value: "all",
+                    text: "Tất cả các lớp"
+                });
+                MaLop.append(selectAllOption);
+
+                if (data && data.length > 0) {
+                    for (let i = 0; i < data.length; i++) {
+                        // Tạo một option mới cho mỗi mã lớp
+                        const option = $('<option>', {
+                            value: data[i].MaLop,
+                            text: data[i].MaPhong
+                        });
+                        MaLop.append(option); // Thêm option vào select dropdown
+                    }
+                }
+            },
+            error: function (error) {
+                console.error("Lỗi khi lấy dữ liệu khoa:", error);
+            }
+        });
+    });
+
+    // Hàm buildData
+    function buildData1() {
+        let tuKhoa = $('#tu-khoa-search').val();
+        const request = {
+            "TuKhoa": tuKhoa,
+        };
+        return request;
+    }
+</script>
+
 <!-- script for table -->
 <script>
     const url = window.location;
@@ -138,6 +207,7 @@
             $('#dataGrid').DataTable().ajax.reload().draw();
         });
 
+        // Bắt sự kiện nhấn search button
         $('#tu-khoa-search').on("keydown", function search(e) {
             if (e.keyCode == 13) {
                 $('#dataGrid').DataTable().ajax.reload().draw();
@@ -204,11 +274,11 @@
             },
             columnDefs: [
                 {
-                    targets: 8,
-                    render: function (data, type, row, meta) {
-                        return `<span title="Chỉnh sửa" class="edit-command-btn" id=n-"${meta.row}">Edit</span>
-                                <span title="Xóa" class="delete-command-btn" id=n-"${meta.row}">Delete</span>`;
-                    }
+                    //targets: 8,
+                    //render: function (data, type, row, meta) {
+                    //    return `<span title="Chỉnh sửa" class="edit-command-btn" id=n-"${meta.row}">Edit</span>
+                    //            <span title="Xóa" class="delete-command-btn" id=n-"${meta.row}">Delete</span>`;
+                    //}
                 }
             ],
             "columns": [
