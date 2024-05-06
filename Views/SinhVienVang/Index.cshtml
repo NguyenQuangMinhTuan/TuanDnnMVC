@@ -246,14 +246,17 @@
     function addData() {
         const MaSinhVien = $('#MaSinhVienAdd').val();
         const HoTen = $('#HoTenAdd').val();
-        const NgayVang = $('#NgayVangAdd').val();
         const LyDo = $('#LyDoAdd').val();
+
+        // Get the current date
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().slice(0, 10);
 
         if (HoTen != null && HoTen != "") {
             const request = {
                 "MaSinhVien": MaSinhVien,
                 "HoTen": HoTen,
-                "NgayVang": NgayVang,  // Gán ngày hiện tại vào đây
+                "NgayVang": formattedDate, // Use the current date here
                 "LyDo": LyDo
             };
 
@@ -266,6 +269,7 @@
                     $('#dataGrid').DataTable().ajax.reload().draw();
                     $('#modalAdd').modal('hide');
 
+                    // Clear input fields after successful addition
                     $('#modalAdd input[type="text"]').val("");
                 },
                 error: function (error) {

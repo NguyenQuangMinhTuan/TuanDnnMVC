@@ -59,5 +59,62 @@ namespace Christoc.Modules.TuanMVC.Repository
                 }
             }
         }
+
+        public async Task<IEnumerable<SinhVien_VLop>> Gets2(string TuKhoa, int MaLop)
+        {
+            using (SqlConnection conn = IConnectData())
+            {
+                try
+                {
+                    await conn.OpenAsync();
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@TuKhoa", TuKhoa);
+                    parameters.Add("@MaLop", MaLop);
+                    IEnumerable<SinhVien_VLop> list = conn.Query<SinhVien_VLop>("spu_Demo_SinhVien_VLop_Gets2", parameters, commandType: CommandType.StoredProcedure);
+
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (conn != null)
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+        }
+
+        public async Task<IEnumerable<SinhVien_VLop>> Gets3(string TuKhoa, int MaLop, string NgayVang)
+        {
+            using (SqlConnection conn = IConnectData())
+            {
+                try
+                {
+                    await conn.OpenAsync();
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@TuKhoa", TuKhoa);
+                    parameters.Add("@MaLop", MaLop);
+                    parameters.Add("@NgayVang", NgayVang);
+                    IEnumerable<SinhVien_VLop> list = conn.Query<SinhVien_VLop>("spu_Demo_SinhVien_VLop_Gets3", parameters, commandType: CommandType.StoredProcedure);
+
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (conn != null)
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+        }
     }
 }

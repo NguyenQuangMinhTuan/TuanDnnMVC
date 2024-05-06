@@ -5,10 +5,8 @@ using System.Web;
 
 namespace Christoc.Modules.TuanMVC.Models
 {
-    public class Request2
+    public class Request_Thongke
     {
-        public string TuKhoaSearch { get; set; }
-
-        public int TuKhoaMaLop { get; set; }
+        public string TuKhoaNgayVang { get; set; }
     }
 }

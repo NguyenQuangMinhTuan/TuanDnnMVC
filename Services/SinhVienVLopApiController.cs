@@ -36,5 +36,20 @@ namespace Christoc.Modules.TuanMVC.Services
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Lỗi :" + ex.Message, "application/json");
             }
         }
+
+        [System.Web.Http.HttpPost]
+        public async Task<HttpResponseMessage> Gets3(Request3 data)
+        {
+            try
+            {
+                IEnumerable<SinhVien_VLop> lst = null;
+                lst = await _repository.Gets3(data.TuKhoaSearch, data.TuKhoaMaLop, data.TuKhoaNgay);
+                return Request.CreateResponse(HttpStatusCode.OK, lst, "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Lỗi :" + ex.Message, "application/json");
+            }
+        }
     }
 }
