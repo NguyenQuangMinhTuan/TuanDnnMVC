@@ -53,6 +53,21 @@ namespace Christoc.Modules.TuanMVC.Services
         }
 
         [System.Web.Http.HttpPost]
+        public async Task<HttpResponseMessage> check(SinhVien_Vang data)
+        {
+            try
+            {
+                SinhVien_Vang item = new SinhVien_Vang();
+                item = await _repository.Add(data);
+                return Request.CreateResponse(HttpStatusCode.OK, item, "application/json");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Lỗi :" + ex.Message, "application/json");
+            }
+        }
+
+        [System.Web.Http.HttpPost]
         public async Task<HttpResponseMessage> Delete(int data)
         {
             try

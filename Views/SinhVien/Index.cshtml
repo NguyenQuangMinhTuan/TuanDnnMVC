@@ -1,10 +1,4 @@
-﻿<div style="text-align:center">
-    <h3> Student management </h3>
-</div>
-
-<hr />
-
-<div class="form-filter">
+﻿<div class="form-filter">
     <div class="form-row">
         <div style="margin: 10px 100px" class="form-group">
             <label style="margin-left:10px">Từ khóa</label>
@@ -19,13 +13,9 @@
 
 <hr />
 
-<div style="text-align:center" class="Container">
-    <a href="~/Module-Students/Attendance">Move to Attendance</a>
-</div>
-
 <div class="table-tree-wrapper table-form-field">
     <div style="width:100%; margin:0 auto;">
-        <table id="dataGrid" class="table-border row-border compact" cellspacing="0">
+        <table style="border:solid 1px" id="dataGrid" class="table table-striped" cellspacing="0">
             <thead>
                 <tr>
                     <th class="center-align">STT</th>
@@ -35,6 +25,7 @@
                     <th>SoDienThoai</th>
                     <th>MaKhoa</th>
                     <th style="color:red; text-decoration: underline">Setting</th>
+                    <th style="color:red; text-decoration: underline">Option</th>
                 </tr>
             </thead>
         </table>
@@ -50,7 +41,7 @@
                 @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
             </div>
             <div class="modal-body">
-                <input id="HoTenAdd" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter Name" />
+                <input id="HoTenAdd" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter name" />
             </div>
             <div class="modal-body">
                 <input id="DiaChiAdd" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter Address" />
@@ -72,8 +63,9 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
-                <button type="button" class="btn btn-secondary" onclick="addData()">Thêm</button>
+                <button type="button" class="btn btn-primary" onclick="addData()">Thêm</button>
             </div>
+
         </div>
     </div>
 </div>
@@ -113,8 +105,9 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
-                <button type="button" class="btn btn-secondary" onclick="editData()">Lưu</button>
+                <button type="button" class="btn btn-primary" onclick="editData()">Lưu</button>
             </div>
+
         </div>
     </div>
 </div>
@@ -132,14 +125,42 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
-                <button type="button" class="btn btn-secondary" onclick="deleteData()">Xóa</button>
+                <button type="button" class="btn btn-primary" onclick="deleteData()">Xóa</button>
             </div>
+
         </div>
     </div>
 </div>
 
-<!-- Modal add-->
-<div class="modal right fade" id="modalAddVang" role="dialog" aria-hidden="true">
+<!-- Modal AddClass -->
+<div class="modal right fade" id="modalAddc" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm vào lớp</h4>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+            </div>
+            <div class="#">
+                <input id="MaSinhVienAddc" required="required" type="hidden" autocomplete="off" class="form-control" />
+            </div>
+
+            <div class="modal-body">
+                <select style="width:100%" id="MaLopAddc">
+                    <!-- option from script -->
+                </select>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary" onclick="addcData()">Thêm</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal add absent-->
+<div class="modal right fade" id="modalAddb" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -147,51 +168,38 @@
                 @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
             </div>
             <div class="modal-body">
-                <input id="MaSinhVienAdd" required="required" type="hidden" autocomplete="off" class="form-control" placeholder="Enter Name" />
-            </div>
-            <div class="modal-body">
-                <input id="HoTenAdd" required="required" type="hidden" autocomplete="off" class="form-control" placeholder="Enter Address" />
-            </div>
-            <div class="modal-body">
-                <input id="NgaySinhAdd" required="required" type="hidden" autocomplete="off" class="form-control" placeholder="Enter Date of Birth" />
-            </div>
-            <div class="modal-body">
-                <input id="MaLopAdd" required="required" type="hidden" autocomplete="off" class="form-control" placeholder="Enter Phone Number" />
-            </div>
-            <div class="modal-body">
-                <input id="NgayVangAdd" required="required" type="hidden" autocomplete="off" class="form-control" placeholder="Enter Phone Number" />
-            </div>
-            <div class="modal-body">
-                <input id="LyDoVangAdd" required="required" type="hidden" autocomplete="off" class="form-control" placeholder="Enter Faculty" />
+                <input id="MaSinhVienAddb" required="required" type="hidden" autocomplete="off" class="form-control" />
+
+                <input id="HoTenAddb" required="required" type="hidden" autocomplete="off" class="form-control" />
+
+                <input id="LyDoAddb" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter reason" />
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
-                <button type="button" class="btn btn-secondary" onclick="addvangData()">Thêm</button>
+                <button type="button" class="btn btn-primary" onclick="addbData()">Thêm</button>
             </div>
+
         </div>
     </div>
 </div>
 
-
-<!-- script for data add dropdown -->
+<!-- script for data edit dropdown khoa -->
 <script>
     $(document).ready(function () {
-        // Khởi tạo Select2 cho Select Dropdown
         $('#MaKhoaAdd').select2({
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             language: "vi",
             placeholder: "Chọn Khoa",
         });
 
-        // Lấy danh sách Khoa từ API và điền vào Select Dropdown
         $.ajax({
             url: `${BASEURL}/api/TuanMVC/SinhVien_KhoaApi/Gets`,
             type: "POST",
             data: buildData(),
             success: function (data) {
                 const MaKhoa = $('#MaKhoaAdd');
-                MaKhoa.empty(); // Xóa tất cả các option hiện có
+                MaKhoa.empty();
                 if (data && data.length > 0) {
 
                     const DefaultOpt = $('<option>', {
@@ -200,12 +208,11 @@
                     MaKhoa.append(DefaultOpt);
 
                     for (let i = 0; i < data.length; i++) {
-                        // Tạo một option mới cho mỗi author
                         const option = $('<option>', {
-                            value: data[i].MaKhoa, // Giả sử ID là giá trị cần thiết
-                            text: data[i].TenKhoa // Tên author là nội dung của option
+                            value: data[i].MaKhoa,
+                            text: data[i].TenKhoa
                         });
-                        MaKhoa.append(option); // Thêm option vào select dropdown
+                        MaKhoa.append(option);
                     }
                 }
             },
@@ -215,42 +222,107 @@
         });
     });
 
-    // Hàm buildData
-    function buildData() {
-        let tuKhoa = $('#tu-khoa-search').val();
-        const request = {
-            "TuKhoa": tuKhoa,
-        };
-        return request;
-    }
+    $(document).ready(function () {
+        function initializeSelect2(selector, parent) {
+            $(selector).select2({
+                width: '100%',
+                language: "vi",
+                placeholder: "Chọn Khoa",
+                dropdownParent: parent
+            });
+        }
+
+        function fetchKhoaData() {
+            $.ajax({
+                url: `${BASEURL}/api/TuanMVC/SinhVien_KhoaApi/Gets`,
+                type: "POST",
+                data: buildData(),
+                success: function (data) {
+                    console.log("Fetched Khoa Data:", data);
+                    const MaKhoaAdd = $('#MaKhoaAdd');
+                    const MaKhoaEdit = $('#MaKhoaEdit');
+                    MaKhoaAdd.empty();
+                    MaKhoaEdit.empty();
+                    if (data && data.length > 0) {
+                        const defaultOpt = $('<option>', { value: "" });
+                        MaKhoaAdd.append(defaultOpt);
+                        MaKhoaEdit.append(defaultOpt.clone());
+
+                        data.forEach(item => {
+                            const option = $('<option>', {
+                                value: item.MaKhoa,
+                                text: item.TenKhoa
+                            });
+                            MaKhoaAdd.append(option);
+                            MaKhoaEdit.append(option.clone());
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error("Error fetching Khoa data:", error);
+                }
+            });
+        }
+
+        function buildData() {
+            let tuKhoa = $('#tu-khoa-search').val();
+            return { "TuKhoa": tuKhoa };
+        }
+
+        fetchKhoaData();
+
+        initializeSelect2('#MaKhoaAdd', $('#modalAdd'));
+        $('#modalEdit').on('shown.bs.modal', function () {
+            initializeSelect2('#MaKhoaEdit', $(this));
+        });
+    });
 </script>
 
-<!-- script for data edit dropdown -->
+
+<!-- script for dropdown MaLop -->
 <script>
     $(document).ready(function () {
         // Khởi tạo Select2 cho Select Dropdown
-        $('#MaKhoaEdit').select2({
+        $('#MaLopAddc').select2({
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             language: "vi",
-            placeholder: "Chọn Khoa",
+            placeholder: "Chọn Lớp",
         });
+
+
+        $('#filter-btn').on('click', function () {
+            // Lấy giá trị mã lớp đã chọn
+            let maLop = $('#MaLopSelect').val();
+
+            // Gán giá trị mã lớp đã chọn vào input ẩn
+            if (maLop === 'all') {
+                $('#ma-search').val(0);
+            } else {
+                $('#ma-search').val(maLop);
+            }
+
+            // Reload datatable sau khi nhấn nút "Tìm kiếm"
+            $('#dataGrid').DataTable().ajax.reload().draw();
+        });
+
 
         // Lấy danh sách Khoa từ API và điền vào Select Dropdown
         $.ajax({
-            url: `${BASEURL}/api/TuanMVC/SinhVien_KhoaApi/Gets`,
+            url: `${BASEURL}/api/TuanMVC/SinhVienLopApi/Gets`,
             type: "POST",
             data: buildData(),
             success: function (data) {
-                const MaKhoa = $('#MaKhoaEdit');
-                MaKhoa.empty(); // Xóa tất cả các option hiện có
+                const MaLop = $('#MaLopAddc');
+                MaLop.empty(); // Xóa tất cả các option hiện có
+
                 if (data && data.length > 0) {
                     for (let i = 0; i < data.length; i++) {
-                        // Tạo một option mới cho mỗi author
+                        // Tạo một option mới cho mỗi mã lớp
                         const option = $('<option>', {
-                            value: data[i].MaKhoa, // Giả sử ID là giá trị cần thiết
-                            text: data[i].TenKhoa // Tên author là nội dung của option
+                            value: data[i].MaLop,
+                            text: data[i].MaPhong
                         });
-                        MaKhoa.append(option); // Thêm option vào select dropdown
+                        MaLop.append(option); // Thêm option vào select dropdown
                     }
                 }
             },
@@ -292,13 +364,6 @@
             }
         });
 
-        //$('#authoridAdd').select2({
-        //    theme: 'bootstrap4',
-        //    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-        //    language: "vi",
-        //    placeholder: $(this).data('placeholder'),
-        //});
-
         function buildData() {
             let tuKhoa = $('#tu-khoa-search').val();
 
@@ -308,18 +373,16 @@
 
             return request;
         };
-        // Khởi tạo bảng #DataGrid
+        
         let table = $('#dataGrid').DataTable({
-            "pageLength": 10,
+            "pageLength": 15,
             "autoWidth": false,
             "ordering": false,
             "bInfo": false,
             "bDestroy": true,
-            "lengthMenu": [
-                [5, 10, 15, 20, 25, 50, 100],
-                ['5 per page', '10 per page (default)', '15 per page', '20 per page', '25 per page', '50 per page', '100 per page']
-            ],
+            "lengthChange": false,
             "filter": false,
+            "scrollY": "400px",
             "language": {
                 "sProcessing": "Đang xử lý...",
                 "sLengthMenu": "_MENU_",
@@ -334,6 +397,7 @@
                     previous: '<i class="icon-fluent icon_fluent_chevron_left_filled"></i>'
                 }
             },
+
             "ajax": {
                 url: `${BASEURL}/api/TuanMVC/SinhVienApi/Gets`,
                 type: "POST",
@@ -352,14 +416,19 @@
             },
             columnDefs: [
                 {
-                    targets: [6, 7], // Targets the 6th and 7th columns
+                    targets: [6, 7],
                     render: function (data, type, row, meta) {
                         if (meta.col == 6) {
-                            return `<span title="Chỉnh sửa" class="edit-command-btn" id="n-${meta.row}">Edit</span>
-                            <span title="Xóa" class="delete-command-btn" id="n-${meta.row}">Delete</span>`;
+                            return `
+                            <span title="Chỉnh sửa" class="edit-command-btn" id="n-${meta.row}">Edit</span>
+                            <span>|<span/>
+                            <span title="Xóa" class="delete-command-btn" id="n-${meta.row}">Delete</span>
+                            <span>|<span/>
+                            <span title="Thêm Vào Lớp" class="addc-command-btn" id="n-${meta.row}">AddC</span>
+                            `;
                         }
                         if (meta.col == 7) {
-                            return `<span title="Thêm Vắng" class="add-command-btn" id="n-${meta.row}">Absent</span>`;
+                            return `<span title="Thêm Vắng" class="addb-command-btn" id="n-${meta.row}">Absent</span>`;
                         }
                         return data;
                     }
@@ -375,7 +444,7 @@
             ]
         });
 
-        // bắt sự kiện click nút delete-command-btn và gán giá trị của idDelete vào data.MaSinhVien
+        // bắt sự kiện click nút delete-command-btn chức năng xóa học sinh
         $('#dataGrid tbody').on('click', '.delete-command-btn', function () {
             var id = $(this).attr("ID").match(/\d+/)[0];
             var data = $('#dataGrid').DataTable().row(id).data();
@@ -385,7 +454,7 @@
             $('#modalDelete').modal('show');
         });
 
-        // bắt sự kiện click nút edit-command-btn và gán giá trị của #... vào data...
+        // bắt sự kiện click nút edit-command-btn chức năng chỉnh sửa thông tin học sinh
         $('#dataGrid tbody').on('click', '.edit-command-btn', function () {
             let id = $(this).attr("ID").match(/\d+/)[0];
             let data = $('#dataGrid').DataTable().row(id).data();
@@ -395,15 +464,39 @@
             $('#DiaChiEdit').val(data.DiaChi);
             $('#NgaySinhEdit').val(data.NgaySinh);
             $('#SoDienThoaiEdit').val(data.SoDienThoai);
-            //$('#MaKhoaEdit').val(data.MaKhoa);
+
             let MaKhoa = data.MaKhoa;
             $('#MaKhoaEdit').val(MaKhoa).trigger('change')
 
             $('#modalEdit').modal('show');
         });
+
+        // bắt sự kiện click nút addb-command-btn thêm 1 học sinh vào danh sách vắng
+        $('#dataGrid tbody').on('click', '.addb-command-btn', function () {
+            let id = $(this).attr("ID").match(/\d+/)[0];
+            let data = $('#dataGrid').DataTable().row(id).data();
+
+            $('#MaSinhVienAddb').val(data.MaSinhVien);
+            $('#HoTenAddb').val(data.HoTen);
+
+            $('#modalAddb').modal('show');
+        });
+
+        // bắt sự kiện click nút addc-command-btn chức năng thêm học sinh mới vào 1 lớp
+        $('#dataGrid tbody').on('click', '.addc-command-btn', function () {
+            let id = $(this).attr("ID").match(/\d+/)[0];
+            let data = $('#dataGrid').DataTable().row(id).data();
+
+            $('#MaSinhVienAddc').val(data.MaSinhVien);
+            $('#MaLopAddc').val(data.MaLop);
+
+            $('#modalAddc').modal('show');
+        });
     });
 
+
     function addData() {
+
         const HoTen = $('#HoTenAdd').val();
         const DiaChi = $('#DiaChiAdd').val();
         const NgaySinh = $('#NgaySinhAdd').val();
@@ -434,6 +527,22 @@
                     console.log(error);
                 }
             });
+
+            $.ajax({
+                url: `${BASEURL}/api/TuanMVC/SinhVienApi/check`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(requestCheck),
+                success: function (data) {
+                    $('#dataGrid').DataTable().ajax.reload().draw();
+                    $('#modalAdd').modal('hide');
+
+                    $('#modalAdd input[type="text"]').val("");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         }
     };
 
@@ -442,10 +551,10 @@
         const HoTen = $('#HoTenEdit').val();
         const DiaChi = $('#DiaChiEdit').val();
         const NgaySinh = $('#NgaySinhEdit').val();
-        const SoDienThoai = $('#SoDienThoai').val();
+        const SoDienThoai = $('#SoDienThoaiEdit').val();
         const MaKhoa = $('#MaKhoaEdit').val();
 
-        if (MaSinhVien != null && MaSinhVien != "" && HoTen != null && HoTen != "") {
+        if (MaSinhVien != null && MaSinhVien != "") {
             const request = {
                 "MaSinhVien": MaSinhVien,
                 "HoTen": HoTen,
@@ -481,6 +590,76 @@
                 success: function (data) {
                     $('#dataGrid').DataTable().ajax.reload().draw();
                     $('#modalDelete').modal('hide');
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    };
+
+    function addbData() {
+        const MaSinhVien = $('#MaSinhVienAddb').val();
+        const HoTen = $('#HoTenAddb').val();
+        const LyDo = $('#LyDoAddb').val();
+
+        // Get the current date
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().slice(0, 10);
+
+        if (MaSinhVien != null && MaSinhVien != "") {
+            const request = {
+                "MaSinhVien": MaSinhVien,
+                "HoTen": HoTen,
+                "NgayVang": formattedDate, // Use the current date here
+                "LyDo": LyDo
+            };
+
+            $.ajax({
+                url: `${BASEURL}/api/TuanMVC/SinhVienVangApi/Add`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(request),
+                success: function (data) {
+                    $('#dataGrid').DataTable().ajax.reload().draw();
+                    $('#modalAddb').modal('hide');
+
+                    // Clear input fields after successful addition
+                    $('#modalAddb input[type="text"]').val("");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    };
+
+    function addcData() {
+        const MaSinhVien = $('#MaSinhVienAddc').val();
+        const MaLop = $('#MaLopAddc').val();
+
+        // Get the current date
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().slice(0, 10);
+
+        if (MaSinhVien != null && MaSinhVien != "") {
+            const request = {
+                "MaSinhVien": MaSinhVien,
+                "NgayDangKy": formattedDate,
+                "MaLop": MaLop
+            };
+
+            $.ajax({
+                url: `${BASEURL}/api/TuanMVC/SinhVienDkyApi/Add`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(request),
+                success: function (data) {
+                    $('#dataGrid').DataTable().ajax.reload().draw();
+                    $('#modalAddc').modal('hide');
+
+                    // Clear input fields after successful addition
+                    $('#modalAddc input[type="text"]').val("");
                 },
                 error: function (error) {
                     console.log(error);
