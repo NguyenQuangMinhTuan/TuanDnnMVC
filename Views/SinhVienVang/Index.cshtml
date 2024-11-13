@@ -1,3 +1,4 @@
+﻿
 ﻿<div style="text-align:center">
     <h3> Absent Checker </h3>
 </div>
@@ -19,13 +20,9 @@
 
 <hr />
 
-<div style="text-align:center" class="Container">
-    <a href="~/Module-Students/Student" >Move to Student</a>
-</div>
-
 <div class="table-tree-wrapper table-form-field">
     <div style="width:100%; margin:0 auto;">
-        <table id="dataGrid" class="table-border row-border compact" cellspacing="0">
+        <table style="border:solid 1px" id="dataGrid" class="table table-striped" cellspacing="0">
             <thead>
                 <tr>
                     <th style="width:100px" class="center-align">STT</th>
@@ -55,8 +52,8 @@
                 <input id="HoTenAdd" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter Name" />
             </div>
             @*<div class="modal-body">
-                <input id="NgayVangAdd" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter day" />
-            </div>*@
+                    <input id="NgayVangAdd" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter day" />
+                </div>*@
             <div class="modal-body">
                 <input id="LyDoAdd" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter reason" />
             </div>
@@ -160,16 +157,14 @@
         };
         // Khởi tạo bảng #DataGrid
         let table = $('#dataGrid').DataTable({
-            "pageLength": 10,
+            "pageLength": 15,
             "autoWidth": false,
             "ordering": false,
             "bInfo": false,
             "bDestroy": true,
-            "lengthMenu": [
-                [5, 10, 15, 20, 25, 50, 100],
-                ['5 per page', '10 per page (default)', '15 per page', '20 per page', '25 per page', '50 per page', '100 per page']
-            ],
+            "lengthChange": false, // Tắt chức năng thay đổi số lượng hiển thị
             "filter": false,
+            "scrollY": "400px",
             "language": {
                 "sProcessing": "Đang xử lý...",
                 "sLengthMenu": "_MENU_",

@@ -1,5 +1,7 @@
-﻿<div style="text-align:center">
-    <h2 style="color: brown"> Class management </h3style="color:>
+﻿<link rel="stylesheet" href="module.css">
+
+<div style="text-align:center">
+    <h2 style="color: brown"> Class management </h2>
 </div>
 
 <!-- tim kiem sinh vien -->
@@ -9,7 +11,7 @@
         <div style="text-align: center" class="form-group">
             <div>
                 <label style="margin-left: 10px">Chọn lớp</label>
-                <select style=width:150px"" id="MaLopSelect">
+                <select style="width:150px" id="MaLopSelect">
                     <option value="">Chọn Mã Lớp</option>
                 </select>
                 <label style="margin-left:20px">Tên sinh viên</label>
@@ -36,7 +38,7 @@
 
 <div class="table-tree-wrapper table-form-field">
     <div style="width:100%; margin:0 auto;">
-        <table id="dataGrid" class="table-border row-border compact" cellspacing="0">
+        <table style="border:solid 1px" id="dataGrid" class="table table-striped" cellspacing="0">
             <thead>
                 <tr>
                     <th style="width:100px" class="center-align">STT</th>
@@ -59,7 +61,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Thống Kê</h4>
-                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
             </div>
             <div class="modal-body">
                 <input id="tu-khoa-ngay-vang" required="required" type="text" autocomplete="off" class="form-control" placeholder="Enter Day" />
@@ -78,7 +79,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Bảng Thống Kê</h4>
-                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
             </div>
             <div class="modal-body">
                 <div class="table-tree-wrapper table-form-field">
@@ -105,7 +105,6 @@
 <!-- script for dropdown MaLop -->
 <script>
     $(document).ready(function () {
-        // Khởi tạo Select2 cho Select Dropdown
         $('#MaLopSelect').select2({
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             language: "vi",
@@ -114,31 +113,25 @@
 
 
         $('#filter-btn').on('click', function () {
-            // Lấy giá trị mã lớp đã chọn
             let maLop = $('#MaLopSelect').val();
 
-            // Gán giá trị mã lớp đã chọn vào input ẩn
             if (maLop === 'all') {
                 $('#ma-search').val(0);
             } else {
                 $('#ma-search').val(maLop);
             }
 
-            // Reload datatable sau khi nhấn nút "Tìm kiếm"
             $('#dataGrid').DataTable().ajax.reload().draw();
         });
 
-
-        // Lấy danh sách Khoa từ API và điền vào Select Dropdown
         $.ajax({
             url: `${BASEURL}/api/TuanMVC/SinhVienLopApi/Gets`,
             type: "POST",
             data: buildData(),
             success: function (data) {
                 const MaLop = $('#MaLopSelect');
-                MaLop.empty(); // Xóa tất cả các option hiện có
+                MaLop.empty();
 
-                // Thêm option "Select All"
                 const selectAllOption = $('<option>', {
                     value: "all",
                     text: "Tất cả các lớp"
@@ -147,12 +140,11 @@
 
                 if (data && data.length > 0) {
                     for (let i = 0; i < data.length; i++) {
-                        // Tạo một option mới cho mỗi mã lớp
                         const option = $('<option>', {
                             value: data[i].MaLop,
                             text: data[i].MaPhong
                         });
-                        MaLop.append(option); // Thêm option vào select dropdown
+                        MaLop.append(option);
                     }
                 }
             },
@@ -162,7 +154,6 @@
         });
     });
 
-    // Hàm buildData
     function buildData() {
         let tuKhoa = $('#tu-khoa-search').val();
         const request = {
@@ -203,13 +194,6 @@
             }
         });
 
-        //$('#authoridAdd').select2({
-        //    theme: 'bootstrap4',
-        //    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-        //    language: "vi",
-        //    placeholder: $(this).data('placeholder'),
-        //});
-
         function buildData() {
             let TuKhoaSearch = $('#tu-khoa-search').val();
             let TuKhoaMaLop = $('#ma-search').val();
@@ -225,16 +209,14 @@
         };
         // Khởi tạo bảng #DataGrid
         let table = $('#dataGrid').DataTable({
-            "pageLength": 10,
+            "pageLength": 15,
             "autoWidth": false,
             "ordering": false,
             "bInfo": false,
             "bDestroy": true,
-            "lengthMenu": [
-                [5, 10, 15, 20, 25, 50, 100],
-                ['5 per page', '10 per page (default)', '15 per page', '20 per page', '25 per page', '50 per page', '100 per page']
-            ],
+            "lengthChange": false, // Tắt chức năng thay đổi số lượng hiển thị
             "filter": false,
+            "scrollY": "400px",
             "language": {
                 "sProcessing": "Đang xử lý...",
                 "sLengthMenu": "_MENU_",
@@ -249,6 +231,7 @@
                     previous: '<i class="icon-fluent icon_fluent_chevron_left_filled"></i>'
                 }
             },
+
             "ajax": {
                 url: `${BASEURL}/api/TuanMVC/SinhVienVLopApi/Gets3`,
                 type: "POST",
@@ -338,17 +321,15 @@
 
             return request;
         };
+
         // Khởi tạo bảng #DataGrid
         let table = $('#dataGrid_ThongKe').DataTable({
-            "pageLength": 20,
+            "pageLength": 10,
             "autoWidth": false,
             "ordering": false,
             "bInfo": false,
             "bDestroy": true,
-            "lengthMenu": [
-                [5, 10, 15, 20, 25, 50, 100],
-                ['5 per page', '10 per page', '15 per page', '20 per page (default)', '25 per page', '50 per page', '100 per page']
-            ],
+            "lengthChange": false, // Tắt chức năng thay đổi số lượng hiển thị
             "filter": false,
             "language": {
                 "sProcessing": "Đang xử lý...",
@@ -364,6 +345,7 @@
                     previous: '<i class="icon-fluent icon_fluent_chevron_left_filled"></i>'
                 }
             },
+
             "ajax": {
                 url: `${BASEURL}/api/TuanMVC/SinhVienVThongKeApi/GetsThongKe`,
                 type: "POST",

@@ -38,7 +38,7 @@ namespace Christoc.Modules.TuanMVC.Services
         }
 
         [System.Web.Http.HttpPost]
-        public async Task<HttpResponseMessage> Gets3(Request3 data)
+        public async Task<HttpResponseMessage> Gets3(Request_Vlop data)
         {
             try
             {

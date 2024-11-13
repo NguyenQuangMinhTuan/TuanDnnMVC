@@ -12,6 +12,8 @@ namespace Christoc.Modules.TuanMVC.Controllers
         // GET: SinhVienVLop
         public ActionResult Index()
         {
+            ViewBag.Title = "Class Management";
+
             return View();
         }
     }

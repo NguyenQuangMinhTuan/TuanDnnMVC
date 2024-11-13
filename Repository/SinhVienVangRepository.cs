@@ -43,6 +43,33 @@ namespace Christoc.Modules.TuanMVC.Repository
             }
         }
 
+        public async Task <SinhVien_Vang> Check(int MaSinhVien)
+        {
+            using (SqlConnection conn = IConnectData())
+            {
+                try
+                {
+                    await conn.OpenAsync();
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@MaSinhVien", MaSinhVien);
+                    SinhVien_Vang item = conn.QueryFirstOrDefault<SinhVien_Vang>("spu_Demo_Module_SinhVien_AbsentCheck", parameters, commandType: CommandType.StoredProcedure);
+
+                    return item;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (conn != null)
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+        }
+
         public async Task<int> Delete(int Data)
         {
             using (SqlConnection conn = IConnectData())

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Christoc.Modules.TuanMVC.Models
 {
-    public class Request3
+    public class Request_Vlop
     {
         public string TuKhoaSearch { get; set; }
 
